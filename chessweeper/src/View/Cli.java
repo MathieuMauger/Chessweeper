@@ -3,10 +3,10 @@ package View;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Menu {
+public class Cli {
 
     // design du menu
-    public void menu() {
+    public static void menu() {
         /** Improves game visibility */
 
 
@@ -48,3 +48,4 @@ public class Menu {
             menu();
         }
     }
+}
