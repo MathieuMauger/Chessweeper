@@ -1,5 +1,7 @@
 package View;
 
+import Models.Models;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -7,13 +9,13 @@ public class Cli {
 
     // design du menu
     public static void startMenu() {
-        /** Improves game visibility */
 
 
+        /*Improves game visibility */
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        /**
+        /*
          Method for displaying the menu
          Returns nothing but displays the menu line by line
          */
@@ -32,7 +34,7 @@ public class Cli {
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    startGame();
+                    setupGame();
                     break;
                 case 2:
                     startRules();
@@ -47,10 +49,6 @@ public class Cli {
             System.out.println("Wrong Answer");
             startMenu();
         }
-    }
-
-    public static void startGame(){
-        System.out.println("Start");
     }
 
     public static void startRules(){
@@ -77,10 +75,62 @@ public class Cli {
                 case 2:
                     System.out.println("See you soon..");
                     break;
+                default:
+                    break;
             }
         }catch (InputMismatchException e) {
             System.out.println("Wrong Answer");
             startRules();
         }
     }
+
+    public static void setupGame(){
+        /* Improves game visibility */
+
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+
+        /*
+         Method for displaying the menu of number of players
+         */
+        System.out.println("╔════════════════════════╗");
+        System.out.println("║    Number of players   ║");
+        System.out.println("╠════════════════════════╣");
+        System.out.println("║ 1. 2 players           ║");
+        System.out.println("║ 2. 3 players           ║");
+        System.out.println("║ 3. 4 players           ║");
+        System.out.println("╚════════════════════════╝");
+
+
+        Scanner scanner = new Scanner(System.in);
+        try {
+
+            int response = scanner.nextInt();
+            switch (response) {
+                case 1:
+                    startGame(2);
+                    break;
+                case 2:
+                    startGame(3);
+                    break;
+                case 3:
+                    startGame(4);
+                    break;
+                default:
+                    break;
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Wrong Answer");
+            setupGame();
+        }
+    }
+        /*Initialization of the complete board*/
+    public static void startGame(int n){
+        String[][] board = Models.InitializeBoard(10,11);
+        Models.placePlayers(board, n);
+        View.ShowBoard(board);
+    }
+
+
 }
