@@ -35,6 +35,12 @@ public class View {
                 else if(board[i][j].equals("2")){
                     toString.append("\uD83D\uDFE5 ");
                 }
+                else if(board[j][i].equals("3")){
+                    toString.append("\uD83D\uDFE9 ");
+                } 
+                else if(board[j][i].equals("4")){
+                    toString.append("\uD83D\uDFE8 ");
+                }
             }
             toString.append("║");
             toString.append("\n");
