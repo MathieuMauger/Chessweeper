@@ -14,11 +14,13 @@ public class Main {
     }
 
     //Prints out current board in cli
-    public static String ShowBoard(String[][] board){
+    public static void ShowBoard(String[][] board){
         String toString = "";
-        for(int i=1;i;i++){
-            for(int j=1;j<=y-1;j++){
-                board[i][j] = "V";
+        for(int i=1;i<= board.length-1;i++){
+            for(int j=1;i<=board[i].length-1;j++){
+                if(board[i][j]==""){
+
+                }
             }
         }
     }
