@@ -43,6 +43,8 @@ public class Cli {
                     System.out.println("See you soon..");
                     break;
                 default:
+                    System.out.println("Wrong Answer");
+                    startMenu();
                     break;
             }
         } catch (InputMismatchException e) {
@@ -76,6 +78,8 @@ public class Cli {
                     System.out.println("See you soon..");
                     break;
                 default:
+                    System.out.println("Wrong Answer");
+                    startRules();
                     break;
             }
         }catch (InputMismatchException e) {
@@ -118,6 +122,8 @@ public class Cli {
                     startGame(4);
                     break;
                 default:
+                    System.out.println("Wrong Answer");
+                    setupGame();
                     break;
             }
         } catch (InputMismatchException e) {
@@ -131,6 +137,5 @@ public class Cli {
         Models.placePlayers(board, n);
         View.ShowBoard(board);
     }
-
 
 }
