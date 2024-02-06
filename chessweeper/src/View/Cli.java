@@ -57,7 +57,7 @@ public class Cli {
         System.out.println(
                 "During his turn a player can move his pawn one space (vertically or\n" +
                 "horizontally), then he destroys a square on the board.\n" +
-                "The last player who can still move wins.\n" +
+                "The last player who can still move wins.\n\n" +
                 "Constraints:\n" +
                 "- A player cannot destroy an occupied square.\n" +
                 "- A player cannot occupy a destroyed square or a square already occupied.\n" +
