@@ -11,13 +11,13 @@ public class Models {
         else if(playerCount == 3){
             board[6][6] = "1";
             board[5][5] = "2";
-            board[7][5] = "3";
+            board[5][7] = "3";
         }
         else if(playerCount == 4){
             board[5][5] = "1";
-            board[5][6] = "2";
-            board[7][5] = "3";
-            board[7][6] = "4";
+            board[6][5] = "2";
+            board[5][7] = "3";
+            board[6][7] = "4";
         }
     }
 
