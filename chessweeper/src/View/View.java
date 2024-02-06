@@ -13,8 +13,12 @@ public class View {
                     toString.append("⬜ ");
                 } else if(board[j][i].equals("1")){
                     toString.append("\uD83D\uDFE6 ");
-                } else if(board[j][i].equals("2")){
+                } else if(board[j][i].equals("2")) {
                     toString.append("\uD83D\uDFE5 ");
+                } else if(board[j][i].equals("3")){
+                    toString.append("\uD83D\uDFE9 ");
+                } else if(board[j][i].equals("4")){
+                    toString.append("\uD83D\uDFE8 ");
                 } else{
                     toString.append("⬛ ");
                 }

@@ -8,6 +8,17 @@ public class Models {
             board[6][5] = "1";
             board[6][6] = "2";
         }
+        else if(playerCount == 3){
+            board[6][6] = "1";
+            board[5][5] = "2";
+            board[7][5] = "3";
+        }
+        else if(playerCount == 4){
+            board[5][5] = "1";
+            board[5][6] = "2";
+            board[7][5] = "3";
+            board[7][6] = "4";
+        }
     }
 
     //Creates board and fills playable squares with V for "Valid square"
