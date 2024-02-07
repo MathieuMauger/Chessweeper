@@ -1,11 +1,10 @@
 package Controller;
 import Models.*;
-import View.*;
 
 import java.util.Random;
 import java.util.Scanner;
 
-public class Controller {
+public class Playing {
     static Scanner scanner = new Scanner(System.in);
 
 

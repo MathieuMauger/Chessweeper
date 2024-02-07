@@ -1,9 +1,7 @@
 package View;
 
-
-import Models.Models;
-import Models.Player;
-import Controller.Controller;
+import Models.*;
+import Controller.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -137,11 +135,11 @@ public class Cli {
         /*Initialization of the complete board*/
     public static void startGame(int n){
 
-        String[][] board = Models.InitializeBoard(10,11);
-        Player[] playerList = Models.placePlayers(board, n);
+        String[][] board = Initialisation.InitializeBoard(10,11);
+        Player[] playerList = Initialisation.placePlayers(board, n);
         View.presentPlayers(playerList);
-        Controller.shufflePlayers(playerList);
-        Controller.gameLoop(board, playerList);
+        Playing.shufflePlayers(playerList);
+        Playing.gameLoop(board, playerList);
     }
 
 

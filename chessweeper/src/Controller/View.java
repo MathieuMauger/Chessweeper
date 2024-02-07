@@ -1,4 +1,4 @@
-package View;
+package Controller;
 import Models.Player;
 public class View {
 

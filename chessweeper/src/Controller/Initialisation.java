@@ -1,9 +1,10 @@
-package Models;
+package Controller;
 
-import java.util.ArrayList;
+import Models.*;
+
 import java.util.Scanner;
 
-public class Models {
+public class Initialisation {
     static Scanner scanner = new Scanner(System.in);
 
     //asks player for name over and over until given valid name, then fills space characters with underscore.
