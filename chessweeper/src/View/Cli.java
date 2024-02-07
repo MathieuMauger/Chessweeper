@@ -1,6 +1,8 @@
 package View;
 
+
 import Models.Models;
+import Models.Player;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -133,9 +135,13 @@ public class Cli {
     }
         /*Initialization of the complete board*/
     public static void startGame(int n){
+
         String[][] board = Models.InitializeBoard(10,11);
-        Models.placePlayers(board, n);
+        Player[] playerList = Models.placePlayers(board, n);
         View.ShowBoard(board);
+        View.displayPlayer(playerList[0]);
+
     }
+
 
 }

@@ -1,5 +1,5 @@
 package View;
-
+import Models.Player;
 public class View {
 
     //Prints out current board in cli
@@ -30,6 +30,7 @@ public class View {
                 //if square is player 1 add blue square
                 else if(board[i][j].equals("1")){
                     toString.append("\uD83D\uDFE6 ");
+
                 }
                 //if square is player 2 add red square
                 else if(board[i][j].equals("2")){
@@ -48,5 +49,22 @@ public class View {
         toString.append("  ╚════════════════════════════════════╝\n");
         toString.append("    A  B  C   D  E  F   G  H  I   J  K\n");
         System.out.println(toString);
+
+
+    }
+
+    public static void displayPlayer(Player player) {
+        if (player.getNumber().equals("1")) {
+            System.out.println("\uD83D\uDFE6 : " + player.getName() + " ");
+        }
+        if (player.getNumber().equals("2")) {
+            System.out.println("\uD83D\uDFE5 : " + player.getName() + " ");
+        }
+        if (player.getNumber().equals("3")) {
+            System.out.println("\uD83D\uDFE9 : " + player.getName() + " ");
+        }
+        if (player.getNumber().equals("4")) {
+            System.out.println("\uD83D\uDFE8 : " + player.getName() + " ");
+        }
     }
 }
