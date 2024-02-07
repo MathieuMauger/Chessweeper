@@ -28,9 +28,7 @@ public class Controller {
         View.ShowBoard(board);
         for(Player p : pList){
             gameTurn(p, board);
-
         }
-
         if(nbPlayersAlive(pList) > 1){
             gameLoop(board, pList);
         }
@@ -70,12 +68,20 @@ public class Controller {
                     p.setPosition(new int[]{p.getPosition()[0]-1, p.getPosition()[1]});
                     board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
                 }
+                else{
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
+                }
                 break;
             case "q":
                 if(board[p.getPosition()[0]][p.getPosition()[1]-1].equals("V")){
                     board[p.getPosition()[0]][p.getPosition()[1]] = "V";
-                    p.setPosition(new int[]{p.getPosition()[0]-1, p.getPosition()[1]});
+                    p.setPosition(new int[]{p.getPosition()[0], p.getPosition()[1]-1});
                     board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
+                }
+                else{
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
                 }
                 break;
             case "s":
@@ -84,12 +90,20 @@ public class Controller {
                     p.setPosition(new int[]{p.getPosition()[0]+1, p.getPosition()[1]});
                     board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
                 }
+                else{
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
+                }
                 break;
             case "d":
                 if(board[p.getPosition()[0]][p.getPosition()[1]+1].equals("V")){
                     board[p.getPosition()[0]][p.getPosition()[1]] = "V";
-                    p.setPosition(new int[]{p.getPosition()[0]+1, p.getPosition()[1]});
+                    p.setPosition(new int[]{p.getPosition()[0], p.getPosition()[1]+1});
                     board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
+                }
+                else{
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
                 }
                 break;
 
