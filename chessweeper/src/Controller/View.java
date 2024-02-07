@@ -1,8 +1,9 @@
 package Controller;
 import Models.Player;
+
 public class View {
 
-    //Prints out current board in cli
+    // Prints out current board in CLI
     public static void ShowBoard(String[][] board){
         StringBuilder toString = new StringBuilder();
         System.out.println("  ╔════════════════════════════════════╗");
@@ -17,30 +18,29 @@ public class View {
                 toString.append(i);
             }
             toString.append("║ ");
-            //enter second for
+            // enter second for
             for(int j=1;j<board[i].length-1;j++){
-                //if board j i empty add empty space very useful comment
+                // if board j i empty add empty space very useful comment
                 if(board[i][j].equals("I")){
-                    toString.append("⬛ ");
+                    toString.append("⬛ "); // Border square
                 }
-                //if valid square add white square
+                // if valid square add white square
                 else if(board[i][j].equals("V")){
-                    toString.append("⬜ ");
+                    toString.append("⬜ "); // Valid square
                 }
-                //if square is player 1 add blue square
+                // if square is player 1 add blue square
                 else if(board[i][j].equals("1")){
-                    toString.append("\uD83D\uDFE6 ");
-
+                    toString.append("\uD83D\uDFE6 "); // Player 1
                 }
-                //if square is player 2 add red square
+                // if square is player 2 add red square
                 else if(board[i][j].equals("2")){
-                    toString.append("\uD83D\uDFE5 ");
+                    toString.append("\uD83D\uDFE5 "); // Player 2
                 }
                 else if(board[i][j].equals("3")){
-                    toString.append("\uD83D\uDFE9 ");
-                } 
+                    toString.append("\uD83D\uDFE9 "); // Player 3
+                }
                 else if(board[i][j].equals("4")){
-                    toString.append("\uD83D\uDFE8 ");
+                    toString.append("\uD83D\uDFE8 "); // Player 4
                 }
             }
             toString.append("║");
@@ -49,29 +49,29 @@ public class View {
         toString.append("  ╚════════════════════════════════════╝\n");
         toString.append("    A  B  C   D  E  F   G  H  I   J  K\n");
         System.out.println(toString);
-
-
     }
 
+    // Method to display colored squares for players
     public static String showColoredSquares(Player player) {
         if (player.getNumber().equals("1")) {
-            return ("\uD83D\uDFE6");
+            return ("\uD83D\uDFE6"); // Player 1 color
         }
         if (player.getNumber().equals("2")) {
-            return ("\uD83D\uDFE5");
+            return ("\uD83D\uDFE5"); // Player 2 color
         }
         if (player.getNumber().equals("3")) {
-            return ("\uD83D\uDFE9");
+            return ("\uD83D\uDFE9"); // Player 3 color
         }
         if (player.getNumber().equals("4")) {
-            return ("\uD83D\uDFE8");
+            return ("\uD83D\uDFE8"); // Player 4 color
         }
         return null;
     }
 
+    // Method to present players with their colored squares
     public static void presentPlayers(Player[] playerlist){
-        for(Player player : playerlist){
-            System.out.println(showColoredSquares(player) + " : " + player.getName());
+        for(Player player : playerlist){ // Iterate over each player in the player list
+            System.out.println(showColoredSquares(player) + " : " + player.getName()); // Print colored square and player name
         }
     }
 }
