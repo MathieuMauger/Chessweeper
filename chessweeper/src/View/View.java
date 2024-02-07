@@ -8,7 +8,7 @@ public class View {
         System.out.println("  ╔════════════════════════════════════╗");
         // Going across the board with nested for loop
         for(int i=1;i< board.length-1;i++){
-            // Check if number is more than 10 so we put less space for text
+            // Check if number is more than 10, so we put less space for text
             if(i<10){
                 toString.append(i);
                 toString.append(" ");
@@ -53,18 +53,25 @@ public class View {
 
     }
 
-    public static void displayPlayer(Player player) {
+    public static String showColoredSquares(Player player) {
         if (player.getNumber().equals("1")) {
-            System.out.println("\uD83D\uDFE6 : " + player.getName() + " ");
+            return ("\uD83D\uDFE6");
         }
         if (player.getNumber().equals("2")) {
-            System.out.println("\uD83D\uDFE5 : " + player.getName() + " ");
+            return ("\uD83D\uDFE5");
         }
         if (player.getNumber().equals("3")) {
-            System.out.println("\uD83D\uDFE9 : " + player.getName() + " ");
+            return ("\uD83D\uDFE9");
         }
         if (player.getNumber().equals("4")) {
-            System.out.println("\uD83D\uDFE8 : " + player.getName() + " ");
+            return ("\uD83D\uDFE8");
+        }
+        return null;
+    }
+
+    public static void presentPlayers(Player[] playerlist){
+        for(Player player : playerlist){
+            System.out.println(showColoredSquares(player) + " : " + player.getName());
         }
     }
 }

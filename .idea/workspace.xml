@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ff3e090-e589-40c6-ad19-56e637a6b397" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/chessweeper/src/Models/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chessweeper/src/Controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chessweeper/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chessweeper/src/Models/Models.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/Models/Models.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chessweeper/src/View/Cli.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/View/Cli.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chessweeper/src/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/View/View.java" afterDir="false" />
     </list>
