@@ -20,31 +20,31 @@ public class Initialisation {
     }
 
     // Method to create a player and place them on the board
-    public static Player createPlayer(String[][] board, int[] position, String number){
+    public static Player createPlayer(String[][] board, int[] position, String number, int score){
         board[position[0]][position[1]] = number; // Placing player on the board
-        return new Player(askName(number), new int[]{position[0],position[1]}, number); // Instantiating Player object with name, position, and number
+        return new Player(askName(number), new int[]{position[0],position[1]}, number, score ); // Instantiating Player object with name, position, and number
     }
 
     // Method to place players on the board based on player count
     public static Player[] placePlayers(String[][] board, int playerCount){
         if(playerCount == 2){ // If there are two players
-            Player p1 = createPlayer(board, new int[]{6,6},"1"); // Create player 1
-            Player p2 = createPlayer(board, new int[]{5,6},"2"); // Create player 2
+            Player p1 = createPlayer(board, new int[]{6,6},"1", 0); // Create player 1
+            Player p2 = createPlayer(board, new int[]{5,6},"2", 0); // Create player 2
             System.out.println(p1.getName()); // Print player 1's name
             System.out.println(p2.getName()); // Print player 2's name
             return new Player[]{p1,p2}; // Return an array of players
         }
         else if(playerCount == 3){ // If there are three players
-            Player p1 = createPlayer(board, new int[]{6,6},"1"); // Create player 1
-            Player p2 = createPlayer(board, new int[]{5,5},"2"); // Create player 2
-            Player p3 = createPlayer(board, new int[]{5,7},"3"); // Create player 3
+            Player p1 = createPlayer(board, new int[]{6,6},"1", 0); // Create player 1
+            Player p2 = createPlayer(board, new int[]{5,5},"2", 0); // Create player 2
+            Player p3 = createPlayer(board, new int[]{5,7},"3", 0); // Create player 3
             return new Player[]{p1,p2,p3}; // Return an array of players
         }
         else if(playerCount == 4){ // If there are four players
-            Player p1 = createPlayer(board, new int[]{5,5},"1"); // Create player 1
-            Player p2 = createPlayer(board, new int[]{6,5},"2"); // Create player 2
-            Player p3 = createPlayer(board, new int[]{5,7},"3"); // Create player 3
-            Player p4 = createPlayer(board, new int[]{6,7},"4"); // Create player 4
+            Player p1 = createPlayer(board, new int[]{5,5},"1", 0); // Create player 1
+            Player p2 = createPlayer(board, new int[]{6,5},"2", 0); // Create player 2
+            Player p3 = createPlayer(board, new int[]{5,7},"3", 0); // Create player 3
+            Player p4 = createPlayer(board, new int[]{6,7},"4", 0); // Create player 4
             return new Player[]{p1,p2,p3,p4}; // Return an array of players
         }
         return null; // Return null if player count is invalid
@@ -67,4 +67,19 @@ public class Initialisation {
         }
         return board; // Returning the initialized board
     }
+
+    public static String InputScoreBoard(){
+
+       return null;
+    }
+
+
+    public static String showScoreBoard(Player[] pList, int score){
+        String scoreBoard = scanner.nextLine(); // Getting user input
+
+
+     return null;
+    }
+
+
 }

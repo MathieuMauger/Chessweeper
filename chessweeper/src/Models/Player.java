@@ -7,13 +7,15 @@ public class Player {
     int[] position; // Player's position on the board
     boolean isAlive; // Player's status (alive or dead)
     String number; // Corresponding number on the board
+    int score; // Player's score after a game
 
     // Constructor
-    public Player(String name, int[] position, String number) {
+    public Player(String name, int[] position, String number, int score) {
         this.name = name; // Initialize name
         this.position = position; // Initialize position
         this.isAlive = true; // Player is initially alive
         this.number = number; // Initialize number
+        this.score = score; // Initialize score
     }
 
     // Getters and setters
@@ -27,6 +29,14 @@ public class Player {
 
     public boolean isAlive() {
         return isAlive; // Check if player is alive
+    }
+
+    public int getScore() {
+        return score; // Get player's score
+    }
+
+    public void setScore(int score) {
+        this.score = score; // Set player's score
     }
 
     public String getNumber() {
