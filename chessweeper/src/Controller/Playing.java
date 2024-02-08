@@ -1,26 +1,11 @@
 package Controller;
 import Models.*;
+import View.*;
 
-import java.io.IOException;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Playing {
     static Scanner scanner = new Scanner(System.in);
-
-    // Method to shuffle the order of players randomly
-    public static void shufflePlayers(Player[] playerList){
-        for(Player player : playerList){ // Iterate over each player in the player list
-            Random rand = new Random(); // Create a new Random object for shuffling
-
-            for (int i = 0; i < playerList.length; i++) { // Iterate over each element in the player list
-                int randomIndexToSwap = rand.nextInt(playerList.length); // Generate a random index to swap
-                Player temp = playerList[randomIndexToSwap]; // Store the player at the random index in a temporary variable
-                playerList[randomIndexToSwap] = playerList[i]; // Swap the player at the random index with the player at index i
-                playerList[i] = temp; // Place the stored player at index i
-            }
-        }
-    }
 
     public static void gameLoop(String[][] board, Player[] pList)  {
         checkEveryoneIsAlive(pList, board);
@@ -29,7 +14,7 @@ public class Playing {
             System.out.flush();
             View.ShowBoard(board);
             System.out.println("WE HAVE A WINNER!!!!");
-            View.inputEndGame(pList);
+            Menues.endGameMenu(pList);
         } else {
             for(Player p : pList){
                 gameTurn(p, board, pList);

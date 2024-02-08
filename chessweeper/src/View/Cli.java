@@ -1,6 +1,5 @@
 package View;
 
-import Models.*;
 import Controller.*;
 
 import java.util.InputMismatchException;
@@ -8,45 +7,6 @@ import java.util.Scanner;
 
 public class Cli {
 
-    // Method to display the start menu
-    public static void startMenu() {
-        // Clears the console
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-
-        // Display the menu options
-        System.out.println("╔════════════════════════╗");
-        System.out.println("║         Menu           ║");
-        System.out.println("╠════════════════════════╣");
-        System.out.println("║ 1. Start the Game      ║");
-        System.out.println("║ 2. Rules               ║");
-        System.out.println("║ 3. Leave               ║");
-        System.out.println("╚════════════════════════╝");
-
-        // Get user input
-        Scanner scanner = new Scanner(System.in);
-        try {
-            int response = scanner.nextInt();
-            switch (response) {
-                case 1:
-                    setupGame();
-                    break;
-                case 2:
-                    startRules();
-                    break;
-                case 3:
-                    System.out.println("See you soon..");
-                    break;
-                default:
-                    System.out.println("Wrong Answer");
-                    startMenu();
-                    break;
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Wrong Answer");
-            startMenu();
-        }
-    }
 
     // Method to display the game rules
     public static void startRules(){
@@ -70,7 +30,7 @@ public class Cli {
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    startMenu();
+                    Menues.startMenu();
                     break;
                 case 2:
                     System.out.println("See you soon..");
@@ -107,13 +67,13 @@ public class Cli {
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    startGame(2);
+                    initialization.startGame(2);
                     break;
                 case 2:
-                    startGame(3);
+                    initialization.startGame(3);
                     break;
                 case 3:
-                    startGame(4);
+                    initialization.startGame(4);
                     break;
                 default:
                     System.out.println("Wrong Answer");
@@ -124,16 +84,5 @@ public class Cli {
             System.out.println("Wrong Answer");
             setupGame();
         }
-    }
-
-    // Method to start the game with the given number of players
-    public static void startGame(int n){
-        // Initialize the game board and players
-        String[][] board = Initialisation.InitializeBoard(10,11);
-        Player[] playerList = Initialisation.placePlayers(board, n);
-        View.presentPlayers(playerList);
-        Playing.shufflePlayers(playerList);
-        // Starting the game
-        Playing.gameLoop(board, playerList);
     }
 }

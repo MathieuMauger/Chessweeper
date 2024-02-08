@@ -3,10 +3,10 @@ package Controller;
 import Models.*;
 import View.*;
 
-import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
-public class Initialisation {
+public class initialization {
     static Scanner scanner = new Scanner(System.in);
 
     // Method to ask player for name and replace spaces with underscores
@@ -70,7 +70,27 @@ public class Initialisation {
         return board; // Returning the initialized board
     }
 
+    // Method to shuffle the order of players randomly
+    public static void shufflePlayers(Player[] playerList){
+        for(Player player : playerList){ // Iterate over each player in the player list
+            Random rand = new Random(); // Create a new Random object for shuffling
 
+            for (int i = 0; i < playerList.length; i++) { // Iterate over each element in the player list
+                int randomIndexToSwap = rand.nextInt(playerList.length); // Generate a random index to swap
+                Player temp = playerList[randomIndexToSwap]; // Store the player at the random index in a temporary variable
+                playerList[randomIndexToSwap] = playerList[i]; // Swap the player at the random index with the player at index i
+                playerList[i] = temp; // Place the stored player at index i
+            }
+        }
+    }
 
-
+    public static void startGame(int n){
+        // Initialize the game board and players
+        String[][] board = initialization.InitializeBoard(10,11);
+        Player[] playerList = initialization.placePlayers(board, n);
+        View.presentPlayers(playerList);
+        initialization.shufflePlayers(playerList);
+        // Starting the game
+        Playing.gameLoop(board, playerList);
+    }
 }
