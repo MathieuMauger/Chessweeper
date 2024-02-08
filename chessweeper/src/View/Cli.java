@@ -10,6 +10,9 @@ public class Cli {
 
     // Method to display the game rules
     public static void startRules(){
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         // Display the game rules
         System.out.println(
                 "During his turn a player can move his pawn one space (vertically or\n" +

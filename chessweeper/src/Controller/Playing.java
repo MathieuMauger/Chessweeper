@@ -17,6 +17,8 @@ public class Playing {
             Menues.endGameMenu(pList);
         } else {
             for(Player p : pList){
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
                 gameTurn(p, board, pList);
             }
             gameLoop(board, pList);// Continue the game loop
@@ -24,6 +26,7 @@ public class Playing {
     }
 
     public static void gameTurn(Player p, String[][] board, Player[] pList){
+
         View.ShowBoard(board);
         System.out.println(p.getName() + " (" + View.showColoredSquares(p) + ") : It's your turn ! ");
 

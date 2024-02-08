@@ -65,7 +65,8 @@ public class Menues {
     }
 
     public static void endGameMenu(Player[] pList) {
-
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
         String[][] scoreboard = new String[][]{};
         try {

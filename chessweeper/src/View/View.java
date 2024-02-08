@@ -80,7 +80,8 @@ public class View {
 
 
     public static void showScoreBoard(String[][] m) {
-
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
         StringBuilder scoreboard = new StringBuilder(
                         "╔═════════════════════════╗\n" +
@@ -95,8 +96,28 @@ public class View {
             scoreboard.append(" ║\n");
 
         }
-        scoreboard.append("╚═════════════════════════╝");
+        scoreboard.append("╚═════════════════════════╝\n");
+        scoreboard.append("1 - Menu         2 - Leave");
         System.out.println(scoreboard);
+
+        try {
+            int response = scanner.nextInt();
+            switch (response) {
+                case 1:
+                    Menues.startMenu();
+                    break;
+                case 2:
+                    System.out.println("See you soon..");
+                    break;
+                default:
+                    System.out.println("Wrong Answer");
+                    showScoreBoard(m);
+                    break;
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Wrong Answer");
+            showScoreBoard(m);
+        }
     }
 
 }
