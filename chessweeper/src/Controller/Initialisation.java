@@ -1,7 +1,9 @@
 package Controller;
 
 import Models.*;
+import View.*;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Initialisation {
@@ -68,18 +70,7 @@ public class Initialisation {
         return board; // Returning the initialized board
     }
 
-    public static String InputScoreBoard(){
 
-       return null;
-    }
-
-
-    public static String showScoreBoard(Player[] pList, int score){
-        String scoreBoard = scanner.nextLine(); // Getting user input
-
-
-     return null;
-    }
 
 
 }

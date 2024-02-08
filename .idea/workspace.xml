@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ff3e090-e589-40c6-ad19-56e637a6b397" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/chessweeper/src/Save/Save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chessweeper/src/Controller/Initialisation.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/Controller/Initialisation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chessweeper/src/Models/Models.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/chessweeper/src/Models/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/Models/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chessweeper/src/Controller/Playing.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/Controller/Playing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chessweeper/src/Controller/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/chessweeper/src/Controller/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

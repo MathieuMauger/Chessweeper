@@ -1,6 +1,7 @@
 package Controller;
 import Models.*;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,11 +22,14 @@ public class Playing {
         }
     }
 
-    public static void gameLoop(String[][] board, Player[] pList){
+    public static void gameLoop(String[][] board, Player[] pList)  {
         checkEveryoneIsAlive(pList, board);
         if(nbPlayersAlive(pList) == 1){
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
             View.ShowBoard(board);
             System.out.println("WE HAVE A WINNER!!!!");
+            View.inputEndGame(pList);
         } else {
             for(Player p : pList){
                 gameTurn(p, board, pList);
@@ -86,7 +90,7 @@ public class Playing {
         System.out.print("Input Z for up, Q for left, S for down or D for right to move\n>");
         String pInput = (scanner.nextLine().toLowerCase());
 
-        switch (pInput) {
+        switch(pInput) {
             case "z":
                 // check if square above player is valid, if so set board square to V square, then set Player square to
                 // new position and change board for new player position
