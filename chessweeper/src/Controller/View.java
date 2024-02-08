@@ -4,6 +4,7 @@ import View.Cli;
 
 import java.io.*;
 import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
@@ -80,7 +81,16 @@ public class View {
 
 
     public static void inputEndGame(Player[] pList) {
-        String scoreBoard = scanner.nextLine(); // Getting user input
+
+
+
+        String[][] scoreboard = new String[][]{};
+        try{
+            scoreboard = txtToMatrix(new File("scoreboard.txt"));
+        } catch (IOException error){
+            System.out.println("You done fucked up");
+        }
+
         inputScores(pList);
 
         System.out.println("╔════════════════════════╗");
@@ -98,7 +108,8 @@ public class View {
                     Cli.setupGame();
                     break;
                 case 2:
-                    showScoreBoard(pList);
+                    System.out.println("debug1");
+                    showScoreBoard(scoreboard);
                     break;
                 case 3:
                     Cli.startMenu();
@@ -148,8 +159,6 @@ public class View {
                 out.write(scores.toString());
                 out.close();
             }else {
-
-                System.out.println("ELSE");
                 //IF SCOREBOARDS EXIST LOCALLY
 
                 String[][] parts2 = txtToMatrix(file);
@@ -172,9 +181,25 @@ public class View {
     }
 
 
-    public static void showScoreBoard(Player[] pList){
+    public static void showScoreBoard(String[][] m){
 
 
+
+        StringBuilder scoreboard = new StringBuilder(
+                "╔═════════════════════════╗\n" +
+                "║        Scoreboard       ║\n" +
+                "╠═════════════════════════╣\n");
+        for(String[] a : m){
+            scoreboard.append("║ " );
+            scoreboard.append((a[0]));
+
+            scoreboard.append(" ".repeat(23 - (a[0].length() + a[1].length())));
+            scoreboard.append((a[1]));
+            scoreboard.append(" ║\n" );
+
+        }
+        scoreboard.append("╚═════════════════════════╝");
+        System.out.println(scoreboard);
     }
 
     public static  String[][] txtToMatrix(File file) throws IOException {
