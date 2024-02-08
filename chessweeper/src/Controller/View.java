@@ -81,12 +81,7 @@ public class View {
 
     public static void inputEndGame(Player[] pList) {
         String scoreBoard = scanner.nextLine(); // Getting user input
-        try {
-            inputScores(pList);
-        }
-        catch (IOException e){
-            System.out.println("Error Alert !");
-        }
+        inputScores(pList);
 
         System.out.println("╔════════════════════════╗");
         System.out.println("║       What next ?      ║");
@@ -121,79 +116,121 @@ public class View {
     }
 
 
-    public static void inputScores(Player[] pList) throws IOException {
-
-
-        for( Player p : pList){
-            if (p.isAlive()){
-                p.setScore(5);
-
-            }
-            else {
-                p.setScore(-2);
-            }
-        }
-
+    public static void inputScores(Player[] pList){
         StringBuilder scores = new StringBuilder();
-        String[] parts = (scores.toString()).split(";");
-        String[][] parts2 = new String[parts.length][];
 
-        File file = new File(
-                "../Save/scoreboard.txt");
-        Scanner fileScanner = new Scanner(file);
-        BufferedWriter out = new BufferedWriter(new FileWriter(file));
-        if (file.createNewFile()){
-            for (Player p : pList){
-                scores.append(p.getName());
-                scores.append(",");
-                scores.append(p.getScore());
-                scores.append(";");
+        File file = new File("scoreboard.txt");
 
+        try{
+            for( Player p : pList){
+                if (p.isAlive()){
+                    p.setScore(5);
 
-            }
-            StringBuilder updatedScoreBoard = new StringBuilder();
-            for (String[] s : parts2){
-                updatedScoreBoard.append(s[0]);
-                updatedScoreBoard.append(",");
-                updatedScoreBoard.append(s[1]);
-                updatedScoreBoard.append(";");
-            }
-            out.write(updatedScoreBoard.toString());
-        }else {
-            while (fileScanner.hasNextLine()) {
-                scores.append(fileScanner.nextLine());
-
-            }
-            int i = 0;
-            for(String  s : parts){
-                parts2[i] = s.split(",");
-                i++;
-
-            }
-            for (Player p : pList){
-                for (int j = 0; j <= i; j++){
-                    if (p.getName().equals(parts2[j][0])){
-                        int baseScore = Integer.parseInt(parts2[j][1]);
-                        int newScore = baseScore + p.getScore();
-                        parts2[j][1] += Integer.toString(newScore);
-
-                    }
+                }
+                else {
+                    p.setScore(-2);
                 }
             }
-            StringBuilder updatedScoreBoard = new StringBuilder();
-            for (String[] s : parts2){
-                updatedScoreBoard.append(s[0]);
-                updatedScoreBoard.append(",");
-                updatedScoreBoard.append(s[1]);
-                updatedScoreBoard.append(";");
+            if (file.createNewFile()){
+
+                //IF NO SCOREBOARD EXISTS LOCALLY :
+
+                //CREATES STRING LIST FROM CURRENT SCORES
+                for (Player p : pList){
+                    scores.append(p.getName());
+                    scores.append(",");
+                    scores.append(p.getScore());
+                    scores.append(";");
+                }
+
+                //OUTPUTS IT
+                BufferedWriter out = new BufferedWriter(new FileWriter(file));
+                out.write(scores.toString());
+                out.close();
+            }else {
+
+                System.out.println("ELSE");
+                //IF SCOREBOARDS EXIST LOCALLY
+
+                String[][] parts2 = txtToMatrix(file);
+
+
+                if(parts2.length != 0){
+                    BufferedWriter out = new BufferedWriter(new FileWriter(file));
+
+                    out.write(matrixToTxt(parts2, pList));
+                    out.close();
+                }
+
 
             }
-            out.write(updatedScoreBoard.toString());
-        }
 
+        }
+        catch(IOException e){
+            System.out.println("SAVED SCORES INTO SCOREBOARD\n" + e);
+        }
     }
+
+
     public static void showScoreBoard(Player[] pList){
 
 
+    }
+
+    public static  String[][] txtToMatrix(File file) throws IOException {
+
+        StringBuilder scores = new StringBuilder();
+
+        Scanner fileScanner = new Scanner(file);
+
+        //READS TXT FILE AND MAKES IT INTO STRING
+        while (fileScanner.hasNextLine()) {
+            scores.append(fileScanner.nextLine());
+        }
+
+        //SPLITS TEXT AND CREATES MATRIX FROM IT
+        String[] parts = (scores.toString()).split(";");
+        String[][] parts2 = new String[parts.length][];
+        int i = 0;
+        for(String  s : parts){
+            parts2[i] = s.split(",");
+            i++;
+        }
+        return parts2;
+    }
+
+    public static String matrixToTxt(String[][] scoreboardMatrix, Player[] pList){
+        //APPENDS NEW SCORES
+        StringBuilder updatedScoreBoard = new StringBuilder();
+
+
+        for(Player p : pList){
+            boolean existsInScoreboard = false;
+            int newScore = 0;
+            for (String[] matrix : scoreboardMatrix) {
+                if (p.getName().equals(matrix[0])) {
+                    existsInScoreboard = true;
+                    newScore = p.getScore() + Integer.parseInt(matrix[1]);
+                    break;
+                }
+            }
+            if(existsInScoreboard){
+                //CREATES STRING LIST FROM CURRENT SCORES
+                updatedScoreBoard.append(p.getName());
+                updatedScoreBoard.append(",");
+                updatedScoreBoard.append(newScore);
+                updatedScoreBoard.append(";");
+            }
+            else {
+                System.out.println(p.getName());
+                updatedScoreBoard.append(p.getName());
+                updatedScoreBoard.append(",");
+                updatedScoreBoard.append(p.getScore());
+                updatedScoreBoard.append(";");
+            }
+        }
+
+
+        return (updatedScoreBoard).toString();
     }
 }

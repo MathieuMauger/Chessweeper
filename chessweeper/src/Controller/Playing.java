@@ -91,6 +91,9 @@ public class Playing {
         String pInput = (scanner.nextLine().toLowerCase());
 
         switch(pInput) {
+            case "kill":
+                p.setAlive(false);
+                break;
             case "z":
                 // check if square above player is valid, if so set board square to V square, then set Player square to
                 // new position and change board for new player position
