@@ -6,14 +6,15 @@ import View.*;
 import java.util.Random;
 import java.util.Scanner;
 
-public class initialization {
+public class Initialization {
     static Scanner scanner = new Scanner(System.in);
 
     // Method to ask player for name and replace spaces with underscores
     public static String askName(String number){
         System.out.print("Player " + number + ", please input your name:\n>"); // Prompting user for input
         String name = scanner.nextLine(); // Getting user input
-        if ((name.length() < 2) || (name.length() > 10 || (name.contains(",")) || (name.contains(";")))){ // Checking if name length is valid
+        // Checking if name length is valid and if it contains invalid characters
+        if ((name.length() < 2) || (name.length() > 10 || (name.contains(",")) || (name.contains(";")))){
             System.out.println("Chosen name is either too long or too short, or contains the character ',' or ';'. Please try again."); // Prompting user to try again
             return askName(number); // Calling the method recursively until valid name is provided
         } else {
@@ -84,12 +85,13 @@ public class initialization {
         }
     }
 
-    public static void startGame(int n){
+    // Method to start the game with the given number of players
+    public static void startGame(int n) {
         // Initialize the game board and players
-        String[][] board = initialization.InitializeBoard(10,11);
-        Player[] playerList = initialization.placePlayers(board, n);
+        String[][] board = Initialization.InitializeBoard(10, 11);
+        Player[] playerList = Initialization.placePlayers(board, n);
         View.presentPlayers(playerList);
-        initialization.shufflePlayers(playerList);
+        Initialization.shufflePlayers(playerList);
         // Starting the game
         Playing.gameLoop(board, playerList);
     }

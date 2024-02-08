@@ -10,26 +10,25 @@ import java.util.Scanner;
 
 public class Saving {
 
+    // Method to input scores and save them to a file
     public static void inputScores(Player[] pList){
         StringBuilder scores = new StringBuilder();
 
-        File file = new File("scoreboard.txt");
+        File file = new File("scoreboard.txt"); // Create a new file object for the scoreboard
 
         try{
             for( Player p : pList){
                 if (p.isAlive()){
-                    p.setScore(5);
-
+                    p.setScore(5); // Set score for alive players
                 }
                 else {
-                    p.setScore(-2);
+                    p.setScore(-2); // Set score for dead players
                 }
             }
             if (file.createNewFile()){
+                // If no scoreboard exists locally
 
-                //IF NO SCOREBOARD EXISTS LOCALLY :
-
-                //CREATES STRING LIST FROM CURRENT SCORES
+                // Create string list from current scores
                 for (Player p : pList){
                     scores.append(p.getName());
                     scores.append(",");
@@ -37,44 +36,41 @@ public class Saving {
                     scores.append(";");
                 }
 
-                //OUTPUTS IT
+                // Output scores to the file
                 BufferedWriter out = new BufferedWriter(new FileWriter(file));
                 out.write(scores.toString());
                 out.close();
             }else {
-                //IF SCOREBOARDS EXIST LOCALLY
+                // If scoreboard exists locally
 
-                String[][] parts2 = txtToMatrix(file);
-
+                String[][] parts2 = txtToMatrix(file); // Read existing scoreboard into a matrix
 
                 if(parts2.length != 0){
                     BufferedWriter out = new BufferedWriter(new FileWriter(file));
 
+                    // Write updated scores to the file
                     out.write(matrixToTxt(parts2, pList));
                     out.close();
                 }
-
-
             }
-
         }
         catch(IOException e){
-            System.out.println("SAVED SCORES INTO SCOREBOARD\n" + e);
+            System.out.println("SAVED SCORES INTO SCOREBOARD\n" + e); // Print error message if an exception occurs
         }
     }
 
+    // Method to convert text file to matrix
     public static  String[][] txtToMatrix(File file) throws IOException {
-
         StringBuilder scores = new StringBuilder();
 
         Scanner fileScanner = new Scanner(file);
 
-        //READS TXT FILE AND MAKES IT INTO STRING
+        // Read the text file and convert it into a string
         while (fileScanner.hasNextLine()) {
             scores.append(fileScanner.nextLine());
         }
 
-        //SPLITS TEXT AND CREATES MATRIX FROM IT
+        // Split text and create matrix from it
         String[] parts = (scores.toString()).split(";");
         String[][] parts2 = new String[parts.length][];
         int i = 0;
@@ -85,17 +81,17 @@ public class Saving {
         return parts2;
     }
 
+    // Method to convert matrix to text
     public static String matrixToTxt(String[][] scoreboardMatrix, Player[] pList){
-        //APPENDS NEW SCORES
+        // Append new scores
         StringBuilder updatedScoreBoard = new StringBuilder();
-
 
         for(Player p : pList){
             boolean isInMatrix = false;
             for(String[] matrix : scoreboardMatrix){
                 if(p.getName().equals(matrix[0])){
                     isInMatrix = true;
-                    matrix[1] = Integer.toString(p.getScore() + Integer.parseInt(matrix[1]));
+                    matrix[1] = Integer.toString(p.getScore() + Integer.parseInt(matrix[1])); // Update score
                 }
             }
             if (!isInMatrix){
@@ -106,6 +102,7 @@ public class Saving {
             }
         }
 
+        // Append existing scores
         for(String[] matrix : scoreboardMatrix) {
             updatedScoreBoard.append(matrix[0]);
             updatedScoreBoard.append(",");

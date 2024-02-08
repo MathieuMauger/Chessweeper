@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
 public class Menues {
 
-    static  Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
+    // Method to display the main menu
     public static void startMenu() {
         // Clears the console
         System.out.print("\033[H\033[2J");
@@ -20,11 +20,11 @@ public class Menues {
 
         String[][] scoreboard = new String[][]{};
         try {
+            // Load the scoreboard from the file
             scoreboard = Saving.txtToMatrix(new File("scoreboard.txt"));
         } catch (IOException error) {
-            System.out.println("You done fucked up");
+            System.out.println("Error loading the scoreboard");
         }
-
 
         // Display the menu options
         System.out.println("╔════════════════════════╗");
@@ -42,41 +42,46 @@ public class Menues {
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    Cli.setupGame();
+                    Cli.setupGame(); // Start the game
                     break;
                 case 2:
-                    Cli.startRules();
+                    Cli.startRules(); // Display the game rules
                     break;
                 case 3:
-                    View.showScoreBoard(scoreboard);
+                    View.showScoreBoard(scoreboard); // Display the scoreboard
                     break;
                 case 4:
-                    System.out.println("See you soon..");
+                    System.out.println("See you soon.."); // Exit the application
                     break;
                 default:
                     System.out.println("Wrong Answer");
-                    startMenu();
+                    startMenu(); // Prompt again if the input is invalid
                     break;
             }
         } catch (InputMismatchException e) {
             System.out.println("Wrong Answer");
-            startMenu();
+            startMenu(); // Prompt again if the input is invalid
         }
     }
 
+    // Method to display the end game menu
     public static void endGameMenu(Player[] pList) {
+        // Clears the console
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
         String[][] scoreboard = new String[][]{};
         try {
+            // Load the scoreboard from the file
             scoreboard = Saving.txtToMatrix(new File("scoreboard.txt"));
         } catch (IOException error) {
-            System.out.println("You done fucked up");
+            System.out.println("Error loading the scoreboard");
         }
 
+        // Update the scoreboard with the current game scores
         Saving.inputScores(pList);
 
+        // Display the end game menu options
         System.out.println("╔════════════════════════╗");
         System.out.println("║       What next ?      ║");
         System.out.println("╠════════════════════════╣");
@@ -85,28 +90,27 @@ public class Menues {
         System.out.println("║ 3. Main Menu           ║");
         System.out.println("╚════════════════════════╝");
 
+        // Get user input
         try {
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
-                    Cli.setupGame();
+                    Cli.setupGame(); // Restart the game
                     break;
                 case 2:
-                    System.out.println("debug1");
-                    View.showScoreBoard(scoreboard);
+                    View.showScoreBoard(scoreboard); // Display the scoreboard
                     break;
                 case 3:
-                    startMenu();
+                    startMenu(); // Return to the main menu
                     break;
                 default:
                     System.out.println("Wrong Answer");
-                    endGameMenu(pList);
+                    endGameMenu(pList); // Prompt again if the input is invalid
                     break;
             }
         } catch (InputMismatchException e) {
             System.out.println("Wrong Answer");
-            endGameMenu(pList);
+            endGameMenu(pList); // Prompt again if the input is invalid
         }
-
     }
 }
