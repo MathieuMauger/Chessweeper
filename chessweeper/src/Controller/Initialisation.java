@@ -13,8 +13,8 @@ public class Initialisation {
     public static String askName(String number){
         System.out.print("Player " + number + ", please input your name:\n>"); // Prompting user for input
         String name = scanner.nextLine(); // Getting user input
-        if ((name.length() < 2) || (name.length() > 10)){ // Checking if name length is valid
-            System.out.println("Chosen name is either too long or too short, please try again."); // Prompting user to try again
+        if ((name.length() < 2) || (name.length() > 10 || (name.contains(",")) || (name.contains(";")))){ // Checking if name length is valid
+            System.out.println("Chosen name is either too long or too short, or contains the character ',' or ';'. Please try again."); // Prompting user to try again
             return askName(number); // Calling the method recursively until valid name is provided
         } else {
             return name.replace(" ", "_"); // Replacing spaces with underscores and returning the name

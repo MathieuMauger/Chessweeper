@@ -205,24 +205,14 @@ public class View {
 
 
         for(Player p : pList){
-            boolean existsInScoreboard = false;
-            int newScore = 0;
-            for (String[] matrix : scoreboardMatrix) {
-                if (p.getName().equals(matrix[0])) {
-                    existsInScoreboard = true;
-                    newScore = p.getScore() + Integer.parseInt(matrix[1]);
-                    break;
+            boolean isInMatrix = false;
+            for(String[] matrix : scoreboardMatrix){
+                if(p.getName().equals(matrix[0])){
+                    isInMatrix = true;
+                    matrix[1] = Integer.toString(p.getScore() + Integer.parseInt(matrix[1]));
                 }
             }
-            if(existsInScoreboard){
-                //CREATES STRING LIST FROM CURRENT SCORES
-                updatedScoreBoard.append(p.getName());
-                updatedScoreBoard.append(",");
-                updatedScoreBoard.append(newScore);
-                updatedScoreBoard.append(";");
-            }
-            else {
-                System.out.println(p.getName());
+            if (!isInMatrix){
                 updatedScoreBoard.append(p.getName());
                 updatedScoreBoard.append(",");
                 updatedScoreBoard.append(p.getScore());
@@ -230,7 +220,12 @@ public class View {
             }
         }
 
-
+        for(String[] matrix : scoreboardMatrix) {
+                updatedScoreBoard.append(matrix[0]);
+                updatedScoreBoard.append(",");
+                updatedScoreBoard.append(matrix[1]);
+                updatedScoreBoard.append(";");
+        }
         return (updatedScoreBoard).toString();
     }
 }

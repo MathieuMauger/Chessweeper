@@ -1,1 +1,1 @@
-poop,11;sock,5;
+poop,-2;sdf,3;dsf2,5;
