@@ -21,93 +21,158 @@ public class Playing {
         }
     }
 
-
-    // While more than 1 player is alive, keep game loop going
     public static void gameLoop(String[][] board, Player[] pList){
-        View.ShowBoard(board); // Display the game board
-        for(Player p : pList){ // Iterate through each player in the player list
-            gameTurn(p, board); // Execute turn for each player
-        }
-        if(nbPlayersAlive(pList) > 1){ // If more than one player is alive
-            gameLoop(board, pList); // Continue the game loop
+        checkEveryoneIsAlive(pList, board);
+        if(nbPlayersAlive(pList) == 1){
+            View.ShowBoard(board);
+            System.out.println("WE HAVE A WINNER!!!!");
+        } else {
+            for(Player p : pList){
+                gameTurn(p, board, pList);
+            }
+            gameLoop(board, pList);// Continue the game loop
         }
     }
 
-    // Method to execute a turn for a player
-    public static void gameTurn(Player p, String[][] board){
-        View.ShowBoard(board); // Display the game board
+    public static void gameTurn(Player p, String[][] board, Player[] pList){
+        View.ShowBoard(board);
+        System.out.println(p.getName() + " (" + View.showColoredSquares(p) + ") : It's your turn ! ");
 
-        String pInput;
+        if(p.isAlive()){
+            movePlayer(board, p);
+            checkEveryoneIsAlive(pList, board);
+            View.ShowBoard(board);
 
-        System.out.println(p.getName() + " (" + View.showColoredSquares(p) + ") : It's your turn ! "); // Prompt the player for their turn
-        System.out.print("Input Z, Q, S OR D to move\n>"); // Prompt for movement input
-        movePlayer(board, p); // Move the player
+            destroySquare(board);
+            checkEveryoneIsAlive(pList, board);
+        }
     }
 
-    // Method to calculate and return the number of alive players
+
+    //calculates and returns number of alive players to see if game needs to stop or keep going
     public static int nbPlayersAlive(Player[] pList){
-        int nb = 0; // Initialize the count of alive players
-        for(Player p : pList){ // Iterate through each player in the player list
-            if(p.isAlive()){ // If the player is alive
-                nb++; // Increment the count of alive players
+        int nb = 0;
+        for(Player p : pList){
+            if(p.isAlive()){
+                nb++;
             }
         }
-        return nb; // Return the count of alive players
+        return nb;
     }
 
-    // Method to move a player based on user input
+
+    //check if adjacent squares are anything else than valid (V), and if 4 squares are invalid (NOT V), kills player.
+    public static void checkIfAlive(Player p, String[][] board){
+        int count = 0;
+        //check up, down, left, right in any order(by checking Player instance position which is stocked as an array
+        // which contains as first position his vertical position and as second position his horizontal position)
+        if (!board[p.getPosition()[0] + 1][p.getPosition()[1]].equals("V")) count++;
+        if (!board[p.getPosition()[0] - 1][p.getPosition()[1]].equals("V")) count++;
+        if (!board[p.getPosition()[0]][p.getPosition()[1] + 1].equals("V")) count++;
+        if (!board[p.getPosition()[0]][p.getPosition()[1] - 1].equals("V")) count++;
+        //if all squares are anything else than valid, kill player. (by making him NOT ALIVE ;))):D:D//D fuck you
+        if (count == 4){
+            p.setAlive(false);
+        }
+    }
+
+    public static void checkEveryoneIsAlive(Player[] pList, String[][] board){
+        for(Player p : pList){
+            checkIfAlive(p, board);
+        }
+    }
+
     public static void movePlayer(String[][] board, Player p){
-        String pInput = (scanner.nextLine().toLowerCase()); // Get the player's input and convert it to lowercase
+        System.out.print("Input Z for up, Q for left, S for down or D for right to move\n>");
+        String pInput = (scanner.nextLine().toLowerCase());
 
         switch (pInput) {
-            case "z": // If input is "z"
-                if(board[p.getPosition()[0]-1][p.getPosition()[1]].equals("V")){ // If the square above the player is valid
-                    board[p.getPosition()[0]][p.getPosition()[1]] = "V"; // Set the current square of the player to a valid square
-                    p.setPosition(new int[]{p.getPosition()[0]-1, p.getPosition()[1]}); // Update player's position
-                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber(); // Update the board with the player's new position
+            case "z":
+                // check if square above player is valid, if so set board square to V square, then set Player square to
+                // new position and change board for new player position
+                if(board[p.getPosition()[0]-1][p.getPosition()[1]].equals("V")){
+                    board[p.getPosition()[0]][p.getPosition()[1]] = "V";
+                    p.setPosition(new int[]{p.getPosition()[0]-1, p.getPosition()[1]});
+                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
                 }
                 else{
-                    System.out.println("Invalid choice, please input something else."); // Prompt for an invalid input
-                    movePlayer(board, p); // Recursively call the movePlayer method until a valid input is received
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
                 }
                 break;
-            case "q": // If input is "q"
-                if(board[p.getPosition()[0]][p.getPosition()[1]-1].equals("V")){ // If the square to the left of the player is valid
-                    board[p.getPosition()[0]][p.getPosition()[1]] = "V"; // Set the current square of the player to a valid square
-                    p.setPosition(new int[]{p.getPosition()[0], p.getPosition()[1]-1}); // Update player's position
-                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber(); // Update the board with the player's new position
+            case "q":
+                if(board[p.getPosition()[0]][p.getPosition()[1]-1].equals("V")){
+                    board[p.getPosition()[0]][p.getPosition()[1]] = "V";
+                    p.setPosition(new int[]{p.getPosition()[0], p.getPosition()[1]-1});
+                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
                 }
                 else{
-                    System.out.println("Invalid choice, please input something else."); // Prompt for an invalid input
-                    movePlayer(board, p); // Recursively call the movePlayer method until a valid input is received
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
                 }
                 break;
-            case "s": // If input is "s"
-                if(board[p.getPosition()[0]+1][p.getPosition()[1]].equals("V")){ // If the square below the player is valid
-                    board[p.getPosition()[0]][p.getPosition()[1]] = "V"; // Set the current square of the player to a valid square
-                    p.setPosition(new int[]{p.getPosition()[0]+1, p.getPosition()[1]}); // Update player's position
-                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber(); // Update the board with the player's new position
+            case "s":
+                if(board[p.getPosition()[0]+1][p.getPosition()[1]].equals("V")){
+                    board[p.getPosition()[0]][p.getPosition()[1]] = "V";
+                    p.setPosition(new int[]{p.getPosition()[0]+1, p.getPosition()[1]});
+                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
                 }
                 else{
-                    System.out.println("Invalid choice, please input something else."); // Prompt for an invalid input
-                    movePlayer(board, p); // Recursively call the movePlayer method until a valid input is received
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
                 }
                 break;
-            case "d": // If input is "d"
-                if(board[p.getPosition()[0]][p.getPosition()[1]+1].equals("V")){ // If the square to the right of the player is valid
-                    board[p.getPosition()[0]][p.getPosition()[1]] = "V"; // Set the current square of the player to a valid square
-                    p.setPosition(new int[]{p.getPosition()[0], p.getPosition()[1]+1}); // Update player's position
-                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber(); // Update the board with the player's new position
+            case "d":
+                if(board[p.getPosition()[0]][p.getPosition()[1]+1].equals("V")){
+                    board[p.getPosition()[0]][p.getPosition()[1]] = "V";
+                    p.setPosition(new int[]{p.getPosition()[0], p.getPosition()[1]+1});
+                    board[p.getPosition()[0]][p.getPosition()[1]] = p.getNumber();
                 }
                 else{
-                    System.out.println("Invalid choice, please input something else."); // Prompt for an invalid input
-                    movePlayer(board, p); // Recursively call the movePlayer method until a valid input is received
+                    System.out.println("Invalid choice, please input something else.");
+                    movePlayer(board, p);
                 }
                 break;
+
             default:
-                System.out.println("Invalid choice, please input something else."); // Prompt for an invalid input
-                movePlayer(board, p); // Recursively call the movePlayer method until a valid input is received
+                System.out.println("Invalid choice, please input something else.");
+                movePlayer(board, p);
                 break;
         }
+    }
+
+    public static int[] destroySquare(String[][] board) {
+        System.out.print("Type the coordinates of the square you want to destroy in this format : 'A 1'\n>");
+        String pInput = scanner.nextLine().toLowerCase();
+        //try to split input into two parts with splitting character being space
+        int y = 0;
+        int x = 0;
+        String[] parts = pInput.split(" ");
+        if (pInput.isEmpty() || parts.length !=2 || parts[0].isEmpty() || parts[1].isEmpty()){
+            System.out.println("Invalid input, please input something");
+            return destroySquare(board);
+        } else {
+            y = convertToNumber(parts[0]);
+            try {
+                x = Integer.parseInt(parts[1]);
+            } catch (NumberFormatException error) {
+                System.out.println("Invalid input, please try again.");
+                return destroySquare(board);
+            }
+            if (x >= 1 && x <= board.length - 2 && y >= 1 && y <= board[0].length - 2 && board[x][y].equals("V")) {
+                board[x][y] = "I";
+                return null;
+            }
+            else{
+                System.out.println("Invalid input, please input something");
+                return destroySquare(board);
+            }
+        }
+    }
+
+    //converts first character of string into number
+    public static int convertToNumber(String input){
+        char inputToChar = (input.toLowerCase()).charAt(0);
+        return inputToChar - 'a' + 1;
     }
 }
