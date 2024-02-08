@@ -53,6 +53,7 @@ public class View {
 
     }
 
+    //returns
     public static String showColoredSquares(Player player) {
         if (player.getNumber().equals("1")) {
             return ("\uD83D\uDFE6");
