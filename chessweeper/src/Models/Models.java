@@ -33,36 +33,4 @@ public class Models {
         return new Player(askName(number, nameList), new int[]{position[0],position[1]}, number);
     }
 
-
-    // Checks player count and calls appropriate functions
-    public static Player[] placePlayers(String[][] board, int playerCount){
-        ArrayList<String> nameList = new ArrayList<>();
-        if(playerCount == 2){
-            //set player in precise positions
-            Player p1 = createPlayer(board, new int[]{board.length/2, board[1].length/2},"1", nameList);
-            Player p2 = createPlayer(board, new int[]{board.length/2-1, board[1].length/2},"2", nameList);
-            System.out.println(p1.getName());
-            System.out.println(p2.getName());
-
-            return new Player[]{p1,p2};
-
-        }
-        else if(playerCount == 3){
-            Player p1 = createPlayer(board, new int[]{board.length/2, board[1].length/2},"1", nameList);
-            Player p2 = createPlayer(board, new int[]{board.length/2-1, board[1].length/2-1},"2", nameList);
-            Player p3 = createPlayer(board, new int[]{board.length/2-1, board[1].length/2+1},"3", nameList);
-
-            return new Player[]{p1,p2,p3};
-
-        }
-        else if(playerCount == 4){
-            Player p1 = createPlayer(board, new int[]{board.length/2-1, board[1].length/2-1},"1", nameList);
-            Player p2 = createPlayer(board, new int[]{board.length/2, board[1].length/2-1},"2", nameList);
-            Player p3 = createPlayer(board, new int[]{board.length/2-1, board[1].length/2+1},"3", nameList);
-            Player p4 = createPlayer(board, new int[]{board.length/2, board[1].length/2+1},"4", nameList);
-
-            return new Player[]{p1,p2,p3,p4};
-        }
-        return null;
-    }
 }
