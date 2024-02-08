@@ -1,27 +1,20 @@
 package View;
 
-
-import Models.Models;
-import Models.Player;
-import Controller.Controller;
+import Models.*;
+import Controller.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Cli {
 
-    // design du menu
+    // Method to display the start menu
     public static void startMenu() {
-
-
-        /*Improves game visibility */
+        // Clears the console
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        /*
-         Method for displaying the menu
-         Returns nothing but displays the menu line by line
-         */
+        // Display the menu options
         System.out.println("╔════════════════════════╗");
         System.out.println("║         Menu           ║");
         System.out.println("╠════════════════════════╣");
@@ -30,10 +23,9 @@ public class Cli {
         System.out.println("║ 3. Leave               ║");
         System.out.println("╚════════════════════════╝");
 
-
+        // Get user input
         Scanner scanner = new Scanner(System.in);
         try {
-
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
@@ -56,22 +48,25 @@ public class Cli {
         }
     }
 
+    // Method to display the game rules
     public static void startRules(){
+        // Display the game rules
         System.out.println(
                 "During his turn a player can move his pawn one space (vertically or\n" +
-                "horizontally), then he destroys a square on the board.\n" +
-                "The last player who can still move wins.\n\n" +
-                "Constraints:\n" +
-                "- A player cannot destroy an occupied square.\n" +
-                "- A player cannot occupy a destroyed square or a square already occupied.\n" +
-                "- A player blocked during a round is declared a loser.\n"
+                        "horizontally), then he destroys a square on the board.\n" +
+                        "The last player who can still move wins.\n\n" +
+                        "Constraints:\n" +
+                        "- A player cannot destroy an occupied square.\n" +
+                        "- A player cannot occupy a destroyed square or a square already occupied.\n" +
+                        "- A player blocked during a round is declared a loser.\n"
         );
 
+        // Display options for the user
         System.out.println("1 - Menu                    2 - Leave");
 
+        // Get user input
         Scanner scanner = new Scanner(System.in);
         try {
-
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
@@ -85,22 +80,19 @@ public class Cli {
                     startRules();
                     break;
             }
-        }catch (InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Wrong Answer");
             startRules();
         }
     }
 
+    // Method to display the menu for selecting number of players
     public static void setupGame(){
-        /* Improves game visibility */
-
-
+        // Clears the console
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        /*
-         Method for displaying the menu of number of players
-         */
+        // Display the menu options for number of players
         System.out.println("╔════════════════════════╗");
         System.out.println("║    Number of players   ║");
         System.out.println("╠════════════════════════╣");
@@ -109,10 +101,9 @@ public class Cli {
         System.out.println("║ 3. 4 players           ║");
         System.out.println("╚════════════════════════╝");
 
-
+        // Get user input
         Scanner scanner = new Scanner(System.in);
         try {
-
             int response = scanner.nextInt();
             switch (response) {
                 case 1:
@@ -134,15 +125,15 @@ public class Cli {
             setupGame();
         }
     }
-        /*Initialization of the complete board*/
+
+    // Method to start the game with the given number of players
     public static void startGame(int n){
-
-        String[][] board = Models.InitializeBoard(10,11);
-        Player[] playerList = Models.placePlayers(board, n);
+        // Initialize the game board and players
+        String[][] board = Initialisation.InitializeBoard(10,11);
+        Player[] playerList = Initialisation.placePlayers(board, n);
         View.presentPlayers(playerList);
-        Controller.shufflePlayers(playerList);
-        Controller.gameLoop(board, playerList);
+        Playing.shufflePlayers(playerList);
+        // Starting the game
+        Playing.gameLoop(board, playerList);
     }
-
-
 }
