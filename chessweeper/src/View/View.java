@@ -1,6 +1,5 @@
 package View;
 
-import Controller.Saving;
 import Models.*;
 
 import java.util.InputMismatchException;
@@ -74,9 +73,11 @@ public class View {
 
         StringBuilder scoreboard = new StringBuilder(
                 "╔═════════════════════════╗\n" +
-                        "║        Scoreboard       ║\n" +
-                        "╠═════════════════════════╣\n");
+                "║        Scoreboard       ║\n" +
+                "╠═════════════════════════╣\n");
         // Iterate over each entry in the scoreboard matrix
+        int i = 0;
+
         for (String[] entry : m) {
             // Append the player name and score with proper formatting
             scoreboard.append("║ ");
@@ -84,6 +85,10 @@ public class View {
             scoreboard.append(" ".repeat(23 - (entry[0].length() + entry[1].length())));
             scoreboard.append(entry[1]); // Player score
             scoreboard.append(" ║\n");
+            i++;
+            if (i>10){
+                break;
+            }
         }
         scoreboard.append("╚═════════════════════════╝\n");
         scoreboard.append("1 - Menu         2 - Leave");
@@ -93,16 +98,12 @@ public class View {
         try {
             int response = scanner.nextInt();
             switch (response) {
-                case 1:
-                    Menues.startMenu(); // Go back to the main menu
-                    break;
-                case 2:
-                    System.out.println("See you soon.."); // Exit the application
-                    break;
-                default:
+                case 1 -> Menues.startMenu(); // Go back to the main menu
+                case 2 -> System.out.println("See you soon.."); // Exit the application
+                default -> {
                     System.out.println("Wrong Answer");
                     showScoreBoard(m); // Prompt again if the input is invalid
-                    break;
+                }
             }
         } catch (InputMismatchException e) {
             System.out.println("Wrong Answer");

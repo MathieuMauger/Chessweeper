@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Saving;
+import Controller.Sorting;
 import Models.Player;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public class Menues {
                     Cli.startRules(); // Display the game rules
                     break;
                 case 3:
-                    View.showScoreBoard(scoreboard); // Display the scoreboard
+                    Sorting.askForOrderScoreboard(scoreboard); // Display the scoreboard
                     break;
                 case 4:
                     System.out.println("See you soon.."); // Exit the application
@@ -98,7 +99,7 @@ public class Menues {
                     Cli.setupGame(); // Restart the game
                     break;
                 case 2:
-                    View.showScoreBoard(scoreboard); // Display the scoreboard
+                    Sorting.askForOrderScoreboard(scoreboard); // Display the scoreboard
                     break;
                 case 3:
                     startMenu(); // Return to the main menu
