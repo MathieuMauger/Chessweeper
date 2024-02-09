@@ -12,10 +12,17 @@ public class Playing {
     public static void gameLoop(String[][] board, Player[] pList)  {
         checkEveryoneIsAlive(pList, board); // Check if everyone is alive
         if(nbPlayersAlive(pList) == 1){ // If only one player is alive, end the game
+
             System.out.print("\033[H\033[2J"); // Clear the console
             System.out.flush();
+            Player winner = null;
+            for(Player p : pList){
+                if(p.isAlive()){
+                    winner = p;
+                }
+            }
             View.ShowBoard(board); // Display the board
-            System.out.println("WE HAVE A WINNER!!!!"); // Print the winner message
+            System.out.println("WE HAVE A WINNER!!!! ( "+ View.showColoredSquares(winner) +") : "+winner.getName()); // Print the winner message
             Menues.endGameMenu(pList); // Display the end game menu
         } else { // If more than one player is alive
             for(Player p : pList){ // Iterate over each player
