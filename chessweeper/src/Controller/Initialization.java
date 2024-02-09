@@ -30,24 +30,26 @@ public class Initialization {
 
     // Method to place players on the board based on player count
     public static Player[] placePlayers(String[][] board, int playerCount){
+        int middleH = ((board.length)/2);
+        int middleV = ((board[0].length)/2);
         if(playerCount == 2){ // If there are two players
-            Player p1 = createPlayer(board, new int[]{6,6},"1", 0); // Create player 1
-            Player p2 = createPlayer(board, new int[]{5,6},"2", 0); // Create player 2
+            Player p1 = createPlayer(board, new int[]{middleV,middleH},"1", 0); // Create player 1
+            Player p2 = createPlayer(board, new int[]{middleV-1,middleH},"2", 0); // Create player 2
             System.out.println(p1.getName()); // Print player 1's name
             System.out.println(p2.getName()); // Print player 2's name
             return new Player[]{p1,p2}; // Return an array of players
         }
         else if(playerCount == 3){ // If there are three players
-            Player p1 = createPlayer(board, new int[]{6,6},"1", 0); // Create player 1
-            Player p2 = createPlayer(board, new int[]{5,5},"2", 0); // Create player 2
-            Player p3 = createPlayer(board, new int[]{5,7},"3", 0); // Create player 3
+            Player p1 = createPlayer(board, new int[]{middleV-1,middleH+1},"1", 0); // Create player 1
+            Player p2 = createPlayer(board, new int[]{middleV-1,middleH-1},"2", 0); // Create player 2
+            Player p3 = createPlayer(board, new int[]{middleV,middleH},"3", 0); // Create player 3
             return new Player[]{p1,p2,p3}; // Return an array of players
         }
         else if(playerCount == 4){ // If there are four players
-            Player p1 = createPlayer(board, new int[]{5,5},"1", 0); // Create player 1
-            Player p2 = createPlayer(board, new int[]{6,5},"2", 0); // Create player 2
-            Player p3 = createPlayer(board, new int[]{5,7},"3", 0); // Create player 3
-            Player p4 = createPlayer(board, new int[]{6,7},"4", 0); // Create player 4
+            Player p1 = createPlayer(board, new int[]{middleV-1,middleH-1},"1", 0); // Create player 1
+            Player p2 = createPlayer(board, new int[]{middleV,middleH-1},"2", 0); // Create player 2
+            Player p3 = createPlayer(board, new int[]{middleV-1,middleH+1},"3", 0); // Create player 3
+            Player p4 = createPlayer(board, new int[]{middleV,middleH+1},"4", 0); // Create player 4
             return new Player[]{p1,p2,p3,p4}; // Return an array of players
         }
         return null; // Return null if player count is invalid

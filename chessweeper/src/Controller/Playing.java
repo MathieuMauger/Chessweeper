@@ -17,7 +17,17 @@ public class Playing {
                 System.out.print("\033[H\033[2J"); // Clear the console
                 System.out.flush();
                 View.ShowBoard(board); // Display the board
-                System.out.println("WE HAVE A WINNER!!!!"); // Print the winner message
+                System.out.println("GAME OVER"); // Print the winner message
+                Menues.endGameMenu(pList); // Display the end game menu
+                System.out.print("\033[H\033[2J"); // Clear the console
+                isGameOver = true; //gameIsOver
+                break;
+            }
+            else if (nbPlayersAlive(pList) == 0){
+                System.out.print("\033[H\033[2J"); // Clear the console
+                System.out.flush();
+                View.ShowBoard(board); // Display the board
+                System.out.println("DRAW"); // Print the winner message
                 Menues.endGameMenu(pList); // Display the end game menu
                 System.out.print("\033[H\033[2J"); // Clear the console
                 isGameOver = true; //gameIsOver
