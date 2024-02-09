@@ -33,7 +33,7 @@ public class Menues {
         System.out.println("║         Menu           ║");
         System.out.println("╠════════════════════════╣");
         System.out.println("║ 1. Start New Game      ║");
-        System.out.println("║ 2. Load Game           ║");
+        System.out.println("║ 2. Load Game   (SOON)  ║");
         System.out.println("║ 3. Rules               ║");
         System.out.println("║ 4. Scores              ║");
         System.out.println("║ 5. Leave               ║");
