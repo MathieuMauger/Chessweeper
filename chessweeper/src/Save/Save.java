@@ -51,7 +51,6 @@ public class Save {
         } catch (IOException error){
             System.out.println("ERROR");
         }
-        Menues.startMenu();
     }
 
 }
