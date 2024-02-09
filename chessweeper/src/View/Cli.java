@@ -24,29 +24,7 @@ public class Cli {
                         "- A player blocked during a round is declared a loser.\n"
         );
 
-        // Display options for the user
-        System.out.println("1 - Menu                    2 - Leave");
-
-        // Get user input
-        Scanner scanner = new Scanner(System.in);
-        try {
-            int response = scanner.nextInt();
-            switch (response) {
-                case 1:
-                    Menues.startMenu(); // Go back to the main menu
-                    break;
-                case 2:
-                    System.out.println("See you soon.."); // Exit the application
-                    break;
-                default:
-                    System.out.println("Wrong Answer");
-                    startRules(); // Prompt again if the input is invalid
-                    break;
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Wrong Answer");
-            startRules(); // Prompt again if the input is invalid
-        }
+        Menues.startMenu();
     }
 
     // Method to display the menu for selecting the number of players
@@ -59,9 +37,9 @@ public class Cli {
         System.out.println("╔════════════════════════╗");
         System.out.println("║    Number of players   ║");
         System.out.println("╠════════════════════════╣");
-        System.out.println("║ 1. 2 players           ║");
-        System.out.println("║ 2. 3 players           ║");
-        System.out.println("║ 3. 4 players           ║");
+        System.out.println("║ 2. players             ║");
+        System.out.println("║ 3. players             ║");
+        System.out.println("║ 4. players             ║");
         System.out.println("╚════════════════════════╝");
 
         // Get user input
@@ -69,13 +47,13 @@ public class Cli {
         try {
             int response = scanner.nextInt();
             switch (response) {
-                case 1:
+                case 2:
                     Initialization.startGame(2); // Start the game with 2 players
                     break;
-                case 2:
+                case 3:
                     Initialization.startGame(3); // Start the game with 3 players
                     break;
-                case 3:
+                case 4:
                     Initialization.startGame(4); // Start the game with 4 players
                     break;
                 default:
