@@ -13,6 +13,8 @@ public class Load {
 
         try {
 
+            System.out.println("NOT IMPLEMENTED YET");
+
             //board = [][]
 
             Scanner sc = new Scanner(file);
