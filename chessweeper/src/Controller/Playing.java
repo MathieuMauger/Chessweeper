@@ -2,6 +2,7 @@ package Controller;
 
 import Models.*;
 import View.*;
+import Save.Save;
 
 import java.util.Scanner;
 
@@ -12,7 +13,11 @@ public class Playing {
     public static void gameLoop(String[][] board, Player[] pList)  {
         checkEveryoneIsAlive(pList, board); // Check if everyone is alive
         boolean isGameOver = false;
+
+        int playerTurn = 0;
+
         for(Player p : pList){ // Iterate over each player
+            playerTurn++;
             if(nbPlayersAlive(pList) == 1) { // If only one player is alive, end the game
                 System.out.print("\033[H\033[2J"); // Clear the console
                 System.out.flush();
@@ -36,6 +41,8 @@ public class Playing {
             else{
                 System.out.flush();
                 gameTurn(p, board, pList); // Execute the turn for each player
+
+                Save.writeSaveFile(board, pList, playerTurn);
             }
         }
         //if game is not over

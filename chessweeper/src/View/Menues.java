@@ -3,6 +3,7 @@ package View;
 import Controller.Saving;
 import Controller.Sorting;
 import Models.Player;
+import Save.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,10 +32,11 @@ public class Menues {
         System.out.println("╔════════════════════════╗");
         System.out.println("║         Menu           ║");
         System.out.println("╠════════════════════════╣");
-        System.out.println("║ 1. Start the Game      ║");
-        System.out.println("║ 2. Rules               ║");
-        System.out.println("║ 3. Scores              ║");
-        System.out.println("║ 4. Leave               ║");
+        System.out.println("║ 1. Start New Game      ║");
+        System.out.println("║ 2. Load Game           ║");
+        System.out.println("║ 3. Rules               ║");
+        System.out.println("║ 4. Scores              ║");
+        System.out.println("║ 5. Leave               ║");
         System.out.println("╚════════════════════════╝");
 
         // Get user input
@@ -46,12 +48,14 @@ public class Menues {
                     Cli.setupGame(); // Start the game
                     break;
                 case 2:
+                    Load.loadGame();
+                case 3:
                     Cli.startRules(); // Display the game rules
                     break;
-                case 3:
+                case 4:
                     Sorting.askForOrderScoreboard(scoreboard); // Display the scoreboard
                     break;
-                case 4:
+                case 5:
                     System.out.println("See you soon.."); // Exit the application
                     break;
                 default:

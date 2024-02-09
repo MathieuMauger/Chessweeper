@@ -10,22 +10,39 @@ public class Initialization {
     static Scanner scanner = new Scanner(System.in);
 
     // Method to ask player for name and replace spaces with underscores
-    public static String askName(String number){
+    public static String askName(String number, Player[] pList){
         System.out.print("Player " + number + ", please input your name:\n>"); // Prompting user for input
         String name = scanner.nextLine(); // Getting user input
+
+        boolean nameAlreadyInUse = false;
+        for (Player p : pList) {
+            if (p!=null && p.getName().equals(name)) {
+                nameAlreadyInUse = true;
+                break;
+            }
+        }
+
         // Checking if name length is valid and if it contains invalid characters
-        if ((name.length() < 2) || (name.length() > 10 || (name.contains(",")) || (name.contains(";")))){
-            System.out.println("Chosen name is either too long or too short, or contains the character ',' or ';'. Please try again."); // Prompting user to try again
-            return askName(number); // Calling the method recursively until valid name is provided
-        } else {
+        if ((name.length() < 2) || (name.length()) > 10 || (name.contains(",")) || (name.contains(";")) || (name.contains("&"))){
+            System.out.println("Chosen name is either too long or too short, or contains the character '&', ';' or ','. Please try again."); // Prompting user to try again
+            return askName(number, pList); // Calling the method recursively until valid name is provided
+        }
+        else if(nameAlreadyInUse){
+            System.out.println("Chosen name is already in use, please use another.");
+            return askName(number, pList); // Calling the method recursively until valid name is provided
+        }
+        else {
             return name.replace(" ", "_"); // Replacing spaces with underscores and returning the name
         }
+
     }
 
     // Method to create a player and place them on the board
-    public static Player createPlayer(String[][] board, int[] position, String number, int score){
+    public static Player createPlayer(String[][] board, int[] position, String number, int score, Player[] pList){
         board[position[0]][position[1]] = number; // Placing player on the board
-        return new Player(askName(number), new int[]{position[0],position[1]}, number, score ); // Instantiating Player object with name, position, and number
+        String name = askName(number, pList);
+
+        return new Player(name, new int[]{position[0],position[1]}, number, score ); // Instantiating Player object with name, position, and number
     }
 
     // Method to place players on the board based on player count
@@ -33,24 +50,38 @@ public class Initialization {
         int middleH = ((board.length)/2);
         int middleV = ((board[0].length)/2);
         if(playerCount == 2){ // If there are two players
-            Player p1 = createPlayer(board, new int[]{middleV,middleH},"1", 0); // Create player 1
-            Player p2 = createPlayer(board, new int[]{middleV-1,middleH},"2", 0); // Create player 2
+            Player[] pList = new Player[2];
+
+            Player p1 = createPlayer(board, new int[]{middleV,middleH},"1", 0, pList); // Create player 1
+            pList[0] = p1;
+            Player p2 = createPlayer(board, new int[]{middleV-1,middleH},"2", 0, pList); // Create player 2
+            pList[1] = p2;
+
             System.out.println(p1.getName()); // Print player 1's name
             System.out.println(p2.getName()); // Print player 2's name
-            return new Player[]{p1,p2}; // Return an array of players
+            return pList; // Return an array of players
         }
         else if(playerCount == 3){ // If there are three players
-            Player p1 = createPlayer(board, new int[]{middleV-1,middleH+1},"1", 0); // Create player 1
-            Player p2 = createPlayer(board, new int[]{middleV-1,middleH-1},"2", 0); // Create player 2
-            Player p3 = createPlayer(board, new int[]{middleV,middleH},"3", 0); // Create player 3
-            return new Player[]{p1,p2,p3}; // Return an array of players
+            Player[] pList = new Player[3];
+            Player p1 = createPlayer(board, new int[]{middleV-1,middleH+1},"1", 0, pList); // Create player 1
+            pList[0] = p1;
+            Player p2 = createPlayer(board, new int[]{middleV-1,middleH-1},"2", 0, pList); // Create player 2
+            pList[1] = p2;
+            Player p3 = createPlayer(board, new int[]{middleV,middleH},"3", 0, pList); // Create player 3
+            pList[2] = p3;
+            return pList; // Return an array of players
         }
         else if(playerCount == 4){ // If there are four players
-            Player p1 = createPlayer(board, new int[]{middleV-1,middleH-1},"1", 0); // Create player 1
-            Player p2 = createPlayer(board, new int[]{middleV,middleH-1},"2", 0); // Create player 2
-            Player p3 = createPlayer(board, new int[]{middleV-1,middleH+1},"3", 0); // Create player 3
-            Player p4 = createPlayer(board, new int[]{middleV,middleH+1},"4", 0); // Create player 4
-            return new Player[]{p1,p2,p3,p4}; // Return an array of players
+            Player[] pList = new Player[4];
+            Player p1 = createPlayer(board, new int[]{middleV-1,middleH-1},"1", 0, pList); // Create player 1
+            pList[0] = p1;
+            Player p2 = createPlayer(board, new int[]{middleV,middleH-1},"2", 0, pList); // Create player 2
+            pList[1] = p2;
+            Player p3 = createPlayer(board, new int[]{middleV-1,middleH+1},"3", 0, pList); // Create player 3
+            pList[2] = p3;
+            Player p4 = createPlayer(board, new int[]{middleV,middleH+1},"4", 0, pList); // Create player 4
+            pList[3] = p4;
+            return pList; // Return an array of players
         }
         return null; // Return null if player count is invalid
     }
