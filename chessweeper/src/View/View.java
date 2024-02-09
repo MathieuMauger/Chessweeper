@@ -73,7 +73,7 @@ public class View {
         System.out.flush();
 
         StringBuilder scoreboard = new StringBuilder(
-                "╔═════════════════════════╗\n" +
+                        "╔═════════════════════════╗\n" +
                         "║        Scoreboard       ║\n" +
                         "╠═════════════════════════╣\n");
         // Iterate over each entry in the scoreboard matrix

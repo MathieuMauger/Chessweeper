@@ -59,9 +59,9 @@ public class Cli {
         System.out.println("╔════════════════════════╗");
         System.out.println("║    Number of players   ║");
         System.out.println("╠════════════════════════╣");
-        System.out.println("║ 1. 2 players           ║");
-        System.out.println("║ 2. 3 players           ║");
-        System.out.println("║ 3. 4 players           ║");
+        System.out.println("║ 2. players             ║");
+        System.out.println("║ 3. players             ║");
+        System.out.println("║ 4. players             ║");
         System.out.println("╚════════════════════════╝");
 
         // Get user input
@@ -69,13 +69,13 @@ public class Cli {
         try {
             int response = scanner.nextInt();
             switch (response) {
-                case 1:
+                case 2:
                     Initialization.startGame(2); // Start the game with 2 players
                     break;
-                case 2:
+                case 3:
                     Initialization.startGame(3); // Start the game with 3 players
                     break;
-                case 3:
+                case 4:
                     Initialization.startGame(4); // Start the game with 4 players
                     break;
                 default:
