@@ -35,11 +35,12 @@ public class Cli {
 
         // Display the menu options for the number of players
         System.out.println("╔════════════════════════╗");
-        System.out.println("║    Number of players   ║");
+        System.out.println("║     Choose a number    ║");
+        System.out.println("║       of  players      ║");
         System.out.println("╠════════════════════════╣");
-        System.out.println("║ 2. players             ║");
-        System.out.println("║ 3. players             ║");
-        System.out.println("║ 4. players             ║");
+        System.out.println("║  2 Players             ║");
+        System.out.println("║  3 Players             ║");
+        System.out.println("║  4 Players             ║");
         System.out.println("╚════════════════════════╝");
 
         // Get user input
