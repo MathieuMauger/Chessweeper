@@ -1,141 +1,70 @@
 package View;
 
-import Models.Models;
+import Controller.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Cli {
 
-    // design du menu
-    public static void startMenu() {
+    // Method to display the game rules
+    public static void startRules(){
 
-
-        /*Improves game visibility */
-        System.out.print("\033[H\033[2J");
+        System.out.print("\033[H\033[2J"); // Clears the console
         System.out.flush();
 
-        /*
-         Method for displaying the menu
-         Returns nothing but displays the menu line by line
-         */
-        System.out.println("╔════════════════════════╗");
-        System.out.println("║         Menu           ║");
-        System.out.println("╠════════════════════════╣");
-        System.out.println("║ 1. Start the Game      ║");
-        System.out.println("║ 2. Rules               ║");
-        System.out.println("║ 3. Leave               ║");
-        System.out.println("╚════════════════════════╝");
-
-
-        Scanner scanner = new Scanner(System.in);
-        try {
-
-            int response = scanner.nextInt();
-            switch (response) {
-                case 1:
-                    setupGame();
-                    break;
-                case 2:
-                    startRules();
-                    break;
-                case 3:
-                    System.out.println("See you soon..");
-                    break;
-                default:
-                    System.out.println("Wrong Answer");
-                    startMenu();
-                    break;
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Wrong Answer");
-            startMenu();
-        }
-    }
-
-    public static void startRules(){
+        // Display the game rules
         System.out.println(
                 "During his turn a player can move his pawn one space (vertically or\n" +
-                "horizontally), then he destroys a square on the board.\n" +
-                "The last player who can still move wins.\n\n" +
-                "Constraints:\n" +
-                "- A player cannot destroy an occupied square.\n" +
-                "- A player cannot occupy a destroyed square or a square already occupied.\n" +
-                "- A player blocked during a round is declared a loser.\n"
+                        "horizontally), then he destroys a square on the board.\n" +
+                        "The last player who can still move wins.\n\n" +
+                        "Constraints:\n" +
+                        "- A player cannot destroy an occupied square.\n" +
+                        "- A player cannot occupy a destroyed square or a square already occupied.\n" +
+                        "- A player blocked during a round is declared a loser.\n"
         );
 
-        System.out.println("1 - Menu                    2 - Leave");
-
-        Scanner scanner = new Scanner(System.in);
-        try {
-
-            int response = scanner.nextInt();
-            switch (response) {
-                case 1:
-                    startMenu();
-                    break;
-                case 2:
-                    System.out.println("See you soon..");
-                    break;
-                default:
-                    System.out.println("Wrong Answer");
-                    startRules();
-                    break;
-            }
-        }catch (InputMismatchException e) {
-            System.out.println("Wrong Answer");
-            startRules();
-        }
+        Menues.startMenu();
     }
 
+    // Method to display the menu for selecting the number of players
     public static void setupGame(){
-        /* Improves game visibility */
-
-
+        // Clears the console
         System.out.print("\033[H\033[2J");
         System.out.flush();
 
-        /*
-         Method for displaying the menu of number of players
-         */
+        // Display the menu options for the number of players
         System.out.println("╔════════════════════════╗");
-        System.out.println("║    Number of players   ║");
+        System.out.println("║     Choose a number    ║");
+        System.out.println("║       of  players      ║");
         System.out.println("╠════════════════════════╣");
-        System.out.println("║ 1. 2 players           ║");
-        System.out.println("║ 2. 3 players           ║");
-        System.out.println("║ 3. 4 players           ║");
+        System.out.println("║  2 Players             ║");
+        System.out.println("║  3 Players             ║");
+        System.out.println("║  4 Players             ║");
         System.out.println("╚════════════════════════╝");
 
-
+        // Get user input
         Scanner scanner = new Scanner(System.in);
         try {
-
             int response = scanner.nextInt();
             switch (response) {
-                case 1:
-                    startGame(2);
-                    break;
                 case 2:
-                    startGame(3);
+                    Initialization.startGame(2); // Start the game with 2 players
                     break;
                 case 3:
-                    startGame(4);
+                    Initialization.startGame(3); // Start the game with 3 players
+                    break;
+                case 4:
+                    Initialization.startGame(4); // Start the game with 4 players
                     break;
                 default:
                     System.out.println("Wrong Answer");
-                    setupGame();
+                    setupGame(); // Prompt again if the input is invalid
                     break;
             }
         } catch (InputMismatchException e) {
             System.out.println("Wrong Answer");
-            setupGame();
+            setupGame(); // Prompt again if the input is invalid
         }
     }
-        /*Initialization of the complete board*/
-    public static void startGame(int n){
-        String[][] board = Models.InitializeBoard(10,11);
-        Models.placePlayers(board, n);
-        View.ShowBoard(board);
-    }
-
 }
