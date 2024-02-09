@@ -1,6 +1,8 @@
 package Save;
 
 import Models.Player;
+import View.Menues;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -49,7 +51,7 @@ public class Save {
         } catch (IOException error){
             System.out.println("ERROR");
         }
+        Menues.startMenu();
     }
-
 
 }
