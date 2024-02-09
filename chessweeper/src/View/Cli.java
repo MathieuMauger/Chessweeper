@@ -24,29 +24,7 @@ public class Cli {
                         "- A player blocked during a round is declared a loser.\n"
         );
 
-        // Display options for the user
-        System.out.println("1 - Menu                    2 - Leave");
-
-        // Get user input
-        Scanner scanner = new Scanner(System.in);
-        try {
-            int response = scanner.nextInt();
-            switch (response) {
-                case 1:
-                    Menues.startMenu(); // Go back to the main menu
-                    break;
-                case 2:
-                    System.out.println("See you soon.."); // Exit the application
-                    break;
-                default:
-                    System.out.println("Wrong Answer");
-                    startRules(); // Prompt again if the input is invalid
-                    break;
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Wrong Answer");
-            startRules(); // Prompt again if the input is invalid
-        }
+        Menues.startMenu();
     }
 
     // Method to display the menu for selecting the number of players
