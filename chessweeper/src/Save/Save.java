@@ -31,7 +31,6 @@ public class Save {
         boardToString.append("&");
 
         boardToString.append(playerTurn);
-        System.out.println(boardToString);
         return boardToString.toString();
     }
 
