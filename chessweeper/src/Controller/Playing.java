@@ -11,18 +11,25 @@ public class Playing {
     // Method to run the game loop
     public static void gameLoop(String[][] board, Player[] pList)  {
         checkEveryoneIsAlive(pList, board); // Check if everyone is alive
-        if(nbPlayersAlive(pList) == 1){ // If only one player is alive, end the game
-            System.out.print("\033[H\033[2J"); // Clear the console
-            System.out.flush();
-            View.ShowBoard(board); // Display the board
-            System.out.println("WE HAVE A WINNER!!!!"); // Print the winner message
-            Menues.endGameMenu(pList); // Display the end game menu
-        } else { // If more than one player is alive
-            for(Player p : pList){ // Iterate over each player
+        boolean isGameOver = false;
+        for(Player p : pList){ // Iterate over each player
+            if(nbPlayersAlive(pList) == 1) { // If only one player is alive, end the game
                 System.out.print("\033[H\033[2J"); // Clear the console
+                System.out.flush();
+                View.ShowBoard(board); // Display the board
+                System.out.println("WE HAVE A WINNER!!!!"); // Print the winner message
+                Menues.endGameMenu(pList); // Display the end game menu
+                System.out.print("\033[H\033[2J"); // Clear the console
+                isGameOver = true; //gameIsOver
+                break;
+            }
+            else{
                 System.out.flush();
                 gameTurn(p, board, pList); // Execute the turn for each player
             }
+        }
+        //if game is not over
+        if(!isGameOver){
             gameLoop(board, pList); // Continue the game loop
         }
     }
@@ -31,9 +38,9 @@ public class Playing {
     public static void gameTurn(Player p, String[][] board, Player[] pList){
 
         View.ShowBoard(board); // Display the board
-        System.out.println(p.getName() + " (" + View.showColoredSquares(p) + ") : It's your turn ! ");
 
         if(p.isAlive()){ // If the player is alive
+            System.out.println(p.getName() + " (" + View.showColoredSquares(p) + ") : It's your turn ! ");
             movePlayer(board, p); // Move the player
             checkEveryoneIsAlive(pList, board); // Check if everyone is alive after the move
             View.ShowBoard(board); // Display the board after the move
